@@ -4,6 +4,15 @@ import { Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { add, remove, addAsync } from './index.redux'
 
+// const mapStatetoProps = (state) => {
+//     return { num: state }
+// }
+// const actionCreators = { add, remove, addAsync }
+@connect(
+    state => ({num: state}),
+    // mapStatetoProps, actionCreators
+    { add, remove, addAsync }
+)
 class FirstRedux extends React.Component {
     render() {
         const store = this.props.store
@@ -19,8 +28,5 @@ class FirstRedux extends React.Component {
         )
     }
 }
-const mapStatetoProps = (state) => {
-    return { num: state }
-}
-const actionCreators = { add, remove, addAsync }
-export default connect(mapStatetoProps, actionCreators)(FirstRedux)
+
+export default FirstRedux // connect(mapStatetoProps, actionCreators)(FirstRedux)
