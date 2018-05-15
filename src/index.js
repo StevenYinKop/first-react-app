@@ -14,6 +14,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import FirstRedux from './FirstRedux';
 import { counter, add, remove, addAsync } from './index.redux';
+import { Provider }from 'react-redux'
 
 const reduxDevtolls = window.devToolsExtension ? window.devToolsExtension() : f => f
 
@@ -33,6 +34,11 @@ const store = createStore(counter, compose(applyMiddleware(thunk), reduxDevtolls
 // store.dispatch({type: 'add'})
 // store.dispatch({type: 'add'})
 // store.dispatch({type: 'add'})
-const render = () => ReactDOM.render(<FirstRedux store={store} add={add} remove={remove} addAsync={addAsync}/>, document.getElementById('root'))
-render()
-store.subscribe(render)
+// const render = () => 
+    ReactDOM.render(
+        (<Provider store={store}>
+            <FirstRedux />
+            </Provider>),
+        document.getElementById('root'))
+// render()
+// store.subscribe(render)
