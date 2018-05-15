@@ -7,33 +7,32 @@
 // ReactDOM.render(<App />, document.getElementById('root'));
 // registerServiceWorker();
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware, compose } from 'redux';
+// 引入中间件 处理异步请求
+import thunk from 'redux-thunk';
+import FirstRedux from './FirstRedux';
+import { counter, add, remove, addAsync } from './index.redux';
 
-import { createStore } from 'redux'
-// 通过reducer建立
-// 根据老的state和action 生成新的state
-function counter(state = 0, action) {
-    switch (action.type) {
-        case 'add':
-        return state + 1;
-        case 'remove':
-        return state - 1;
-        default:
-        return 10;
-    }
-}
+const reduxDevtolls = window.devToolsExtension ? window.devToolsExtension() : f => f
 
-// 1. 新建store
-const store = createStore(counter)
-function listener() {
-    const current = store.getState()
-    console.log(current)
-}
+// // 1. 新建store
+const store = createStore(counter, compose(applyMiddleware(thunk), reduxDevtolls))// applyMiddleware(thunk))
+ 
+// function listener() {
+//     const current = store.getState()
+//     console.log(current)
+// }
 
-store.subscribe(listener)
-const init = store.getState()
-console.log(init)
+// store.subscribe(listener)
+// const init = store.getState()
+// console.log(init)
 
-store.dispatch({type: 'add'})
-store.dispatch({type: 'add'})
-store.dispatch({type: 'add'})
-store.dispatch({type: 'add'})
+// store.dispatch({type: 'add'})
+// store.dispatch({type: 'add'})
+// store.dispatch({type: 'add'})
+// store.dispatch({type: 'add'})
+const render = () => ReactDOM.render(<FirstRedux store={store} add={add} remove={remove} addAsync={addAsync}/>, document.getElementById('root'))
+render()
+store.subscribe(render)
