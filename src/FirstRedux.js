@@ -9,13 +9,13 @@ import { add, remove, addAsync } from './index.redux'
 // }
 // const actionCreators = { add, remove, addAsync }
 @connect(
-    state => ({num: state}),
+    state => ({ num: state.counter }),
     // mapStatetoProps, actionCreators
     { add, remove, addAsync }
 )
 class FirstRedux extends React.Component {
     render() {
-        const store = this.props.store
+        console.log(this.props)
         // const num = store.getState()
         const num = this.props.num
         return (
