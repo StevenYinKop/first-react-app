@@ -1,55 +1,29 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-// import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
-
-// ReactDOM.render(<App />, document.getElementById('root'));
-// registerServiceWorker();
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 // 引入中间件 处理异步请求
 import thunk from 'redux-thunk';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Auth from './Auth'
-import Dashborad from './Dashborad'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Login from './container/login/login'
+import Register from './container/register/register'
+import AuthRoute from './component/authroute/authroute'
 import { Provider } from 'react-redux'
-import reducers from './reducer'
+import combineReducers from './reducer'
+import './config'
 
 const reduxDevtolls = window.devToolsExtension ? window.devToolsExtension() : f => f
-
-// // 1. 新建store
-// 使用合并的reducer
-const store = createStore(reducers, compose(applyMiddleware(thunk), reduxDevtolls))// applyMiddleware(thunk))
-
-// function listener() {
-//     const current = store.getState()
-//     console.log(current)
-// }
-
-// store.subscribe(listener)
-// const init = store.getState()
-// console.log(init)
-
-// store.dispatch({type: 'add'})
-// store.dispatch({type: 'add'})
-// store.dispatch({type: 'add'})
-// store.dispatch({type: 'add'})
-// const render = () => 
+const store = createStore(combineReducers, compose(applyMiddleware(thunk), reduxDevtolls))
 
 ReactDOM.render(
-    (<Provider store={store}>
+    <Provider store={store}>
         <BrowserRouter>
-            <Switch >
-                {/* 只渲染第一个匹配的路径, 不会往下走 */}
-                <Route path='/login' exact component={Auth} />
-                <Route path='/home' component={Dashborad} />
-                <Redirect to='/home' />
-            </Switch>
+            {/* <Switch > */}
+            <div>
+                <AuthRoute />
+                <Route path='/login' component={Login} />
+                <Route path='/register' component={Register} />
+            </div>
+            {/* </Switch> */}
         </ BrowserRouter>
-    </Provider>),
+    </Provider>,
     document.getElementById('root'))
-// render()
-// store.subscribe(render)
