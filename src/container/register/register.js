@@ -3,6 +3,7 @@ import Logo from '../../component/logo/logo'
 import { List, InputItem, Radio, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { register } from '../../redux/user.redux'
+import './register.css'
 
 @connect(
     state => state.user,
@@ -19,9 +20,11 @@ export default class Register extends React.Component {
         }
     }
     render() {
+        console.log(this.props)
         return (<div>
             <Logo />
             <List>
+                <WhiteSpace />
                 {this.props.msg && <p className='error-msg'>{this.props.msg}</p>}
                 <InputItem onChange={v => this.setState({ user: v })}>用户名</InputItem>
                 <InputItem type="password" onChange={v => this.setState({ password: v })}>密码</InputItem>

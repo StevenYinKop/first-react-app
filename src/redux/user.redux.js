@@ -16,7 +16,7 @@ export function user(state = initState, action) {
         case REGISTER_SUCCESS:
             return { ...state, msg: '', isAuth: true, ...action.payload }
         case ERROR_MSG:
-            return { ...state, isAuth: false }
+            return { ...state, msg: action.msg, isAuth: false }
         default:
             return state;
     }
@@ -33,9 +33,11 @@ function errorMsg(msg) {
 export function register({ user, password, confirm, type }) {
     console.log('redux : register', user, password, confirm, type )
     if (!user || !password || !type) {
+        console.log('用户名密码必须输入')
         return errorMsg('用户名密码必须输入')
     }
     if (password !== confirm) {
+        console.log('两次密码不一致')
         return errorMsg('两次密码不一致')
     }
     return dispatch => {
