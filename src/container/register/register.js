@@ -2,6 +2,7 @@ import React from 'react'
 import Logo from '../../component/logo/logo'
 import { List, InputItem, Radio, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { register } from '../../redux/user.redux'
 import './register.css'
 
@@ -19,9 +20,11 @@ export default class Register extends React.Component {
             type: 1
         }
     }
+
     render() {
         console.log(this.props)
         return (<div>
+            {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : null}
             <Logo />
             <List>
                 <WhiteSpace />

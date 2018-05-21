@@ -1,5 +1,4 @@
 import React from 'react'
-import { createStore } from 'redux'
 import { Button, List } from 'antd-mobile'
 class App extends React.Component {
   render() {
