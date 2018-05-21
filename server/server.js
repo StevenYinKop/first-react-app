@@ -6,7 +6,7 @@ const cors = require('cors')
 const app = express()
 
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({credentials: true}))
 app.use(bodyParser.json())
 app.use('/user', userRouter)
 
