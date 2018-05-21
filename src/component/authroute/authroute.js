@@ -27,8 +27,8 @@ export default class AuthRoute extends React.Component {
                     if(res.data.code === 0) {
                         this.props.loadData(res.data.data)
                     } else {
-                        this.props.history.push('/login')
                         console.log('res.data.code != 0', this.props.history)
+                        this.props.history.push('/login')
                     }
                     console.log(res.data)
                     this.setState({result: res.data})

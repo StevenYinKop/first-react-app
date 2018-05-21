@@ -39,7 +39,6 @@ export function login({ user, password }) {
             password,
         }).then(res => {
             if (res.status === 200 && res.data.code === 0) {
-                // dispatch(registerSuccess({ user, password, type }))
                 dispatch(loginSuccess(res.data.data))
             } else {
                 dispatch(errorMsg(res.data.msg))

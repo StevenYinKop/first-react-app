@@ -43,14 +43,16 @@ Router.post('/register', function (req, resp) {
         if (doc) {
             return resp.json({ code: 1, msg: '用户名重复' })
         }
-        
-        // User.create({ user, password: md5Password(password), type }, function (err, doc) {
-        //     if(err) throw err
-        //     console.log('User.create', doc)
-        //     resp.json({ code: 0 })
-        // })
+        const userModel = new User({ user, password: md5Password(password), type })
+        userModel.save(function (err, doc){
+            if(err) {
+                return resp.json({ code: 1, msg: '服务器正忙!' })
+            }
+            const { user, type, _id } = doc
+            resp.cookie('userid', _id)
+            return resp.json({ code:0, data: { user, type, _id }})
+        })
     })
-    // resp.json({ code: 0 })
 })
 
 function md5Password(password) {
