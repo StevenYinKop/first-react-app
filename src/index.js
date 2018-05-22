@@ -12,6 +12,7 @@ import AuthRoute from './component/authroute/authroute'
 import { Provider } from 'react-redux'
 import combineReducers from './reducer'
 import './config'
+import DashBorad from './container/dashborad/dashborad';
 
 const reduxDevtolls = window.devToolsExtension ? window.devToolsExtension() : f => f
 const store = createStore(combineReducers, compose(applyMiddleware(thunk), reduxDevtolls))
@@ -26,6 +27,7 @@ ReactDOM.render(
                 <Route path='/empinfo' component={EmpInfo} />
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Register} />
+                <Route path='/dashborad' component={DashBorad} />
             </div>
             {/* </Switch> */}
         </ BrowserRouter>
