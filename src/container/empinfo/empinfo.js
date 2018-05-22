@@ -9,7 +9,7 @@ import { update } from '../../redux/user.redux'
     state => state.user,
     { update }
 )
-export default class CompanyInfo extends React.Component {
+export default class EmpInfo extends React.Component {
 
     onChange(key, val) {
         this.setState({
@@ -30,18 +30,15 @@ export default class CompanyInfo extends React.Component {
                         <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
                         <Icon key="1" type="ellipsis" />,
                     ]}
-                >NavBar</NavBar>
+                >应聘者完善资料</NavBar>
                 <AvatarSelector selectAvatar={(imageName) => this.setState({ avatar: imageName })} />
-                <InputItem onChange={(v) => this.onChange('title', v)} >招聘职位</InputItem>
-                <InputItem onChange={(v) => this.onChange('companyName', v)} >公司名称</InputItem>
-                <InputItem onChange={(v) => this.onChange('salary', v)} >期望薪资</InputItem>
+                <InputItem onChange={(v) => this.onChange('title', v)} >期望职位</InputItem>
                 <TextareaItem
-                    title="职位简介"
+                    title="个人简介"
                     placeholder="请输入..."
                     rows={3}
                     clear />
                 <InputItem onChange={(v) => this.onChange('desc', v)} ></InputItem>
-
                 <Button onClick={() => this.props.update(this.state)} type='primary'>保存</Button>
             </div>
         )

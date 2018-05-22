@@ -54,6 +54,24 @@ Router.post('/register', function (req, resp) {
     })
 })
 
+Router.post('/update', function (req, resp) {
+    const { userid } = req.cookies
+    if(!userid){
+        return resp.json({ code: 1 })
+    }
+    const body = req.body
+    User.findByIdAndUpdate(userid, body,function(err, doc){
+        if(err) {
+            return resp.json({ code: 1, msg: '服务器正忙!' })
+        }
+        const data = Object.assign({}, {
+            user: doc.user,
+            type: doc.type
+        }, body)
+        return resp.json({ code: 0, data })
+    })
+})
+
 function md5Password(password) {
     const salt = 'charRoom_Liverpool!315'
     return utils.md5(utils.md5(`${password}${salt}`))
