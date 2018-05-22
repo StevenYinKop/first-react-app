@@ -34,7 +34,7 @@ export function login({ user, password }) {
         return errorMsg('用户名密码必须输入')
     }
     return dispatch => {
-        axios.post('http://localhost:9000/user/login', {
+        axios.post('/user/login', {
             user,
             password,
         }).then(res => {
@@ -73,7 +73,7 @@ export function register({ user, password, confirm, type }) {
         return errorMsg('两次密码不一致')
     }
     return dispatch => {
-        axios.post('http://localhost:9000/user/register', {
+        axios.post('/user/register', {
             user,
             password,
             type,

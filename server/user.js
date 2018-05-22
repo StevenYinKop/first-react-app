@@ -23,15 +23,14 @@ Router.get('/list', function (req, resp) {
 })
 
 Router.post('/login', function (req, resp){
-    console.log(req.body)
     const { user, password } = req.body
     User.findOne({ user, password: md5Password(password) }, _filter, function (err, doc) {
         if(err) throw err
         if(doc) {
-            resp.cookie('userid', doc._id)
-            return resp.json({ code: 0, data: doc})
+            console.log('set userid to cookie ....id = ', doc._id)
+            resp.cookie('userid', doc._id).json({ code: 0, data: doc})
         } else {
-            return resp.json({ msg: '账号信息有误请确认!', code: 1})
+            resp.json({ msg: '账号信息有误请确认!', code: 1})
         }
     })
 }) 

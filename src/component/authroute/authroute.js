@@ -41,6 +41,6 @@ export default class AuthRoute extends React.Component {
         // 用户是否完善信息(头像/个人简介)
     }
     render () {
-        return (<h1>{this.state.result && this.state.result.code}</h1>)
+        return null//(<h1>{this.state.result && this.state.result.code}</h1>)
     }
 }

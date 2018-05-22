@@ -2,17 +2,26 @@ const express = require('express')
 const userRouter = require('./user')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const cors = require('cors')
+// const cors = require('cors')
 const app = express()
 
+// app.use(cors({credentials: true}))
 app.use(cookieParser())
-app.use(cors({credentials: true}))
 app.use(bodyParser.json())
-app.use('/user', userRouter)
 
-// app.get("/", function (req, resp) {
-//   resp.send('hello!')
+// app.use("/", function (req, resp, next) {
+//   console.log(req.headers)
+//   var origin = req.header('origin')
+//   console.log(origin)
+//   if(origin) 
+//   resp.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+//   resp.header('Access-Control-Allow-Methods', '*')
+//   resp.header('Access-Control-Allow-Headers', 'Content-Type')
+//   resp.header('Access-Control-Max-Age', '3600')
+//   resp.header('Access-Control-Allow-Credentials', 'true')
+//   next()
 // })
-app.listen(9000, function () {
-  console.log('Node start at port 9000')
+app.use('/user', userRouter)
+app.listen(9093, function () {
+  console.log('Node start at port 9093')
 })

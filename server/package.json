@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "cors": "^2.8.4",
-    "mongoose": "^5.1.0"
-  }
-}
