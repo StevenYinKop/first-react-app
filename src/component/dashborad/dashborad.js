@@ -5,15 +5,11 @@ import { connect } from 'react-redux'
 import NavLink from '../navlink/navlink';
 import Company from "../company/company";
 import Emp from "../emp/emp";
+import Me from '../me/me';
 
 const Msg = (props) => {
     return (<h1>Msg</h1>)
 }
-const Me = (props) => {
-    return (<h1>Me</h1>)
-}
-
-
 const DashBorad = ({ user, location }) => {
 
     const navList = [{
@@ -48,7 +44,6 @@ const DashBorad = ({ user, location }) => {
     return (
         <div>
             <NavBar className="fix-header">{navList.find(v => location.pathname === v.path).title }</NavBar>
-            <div></div>
             <Switch >
                 {navList.map(item =>
                     <Route key={item.path} path={item.path} component={item.component} />
