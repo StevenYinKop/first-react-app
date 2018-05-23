@@ -37,8 +37,8 @@ export default class EmpInfo extends React.Component {
                     title="个人简介"
                     placeholder="请输入..."
                     rows={3}
+                    onChange={(v) => this.onChange('desc', v)}
                     clear />
-                <InputItem onChange={(v) => this.onChange('desc', v)} ></InputItem>
                 <Button onClick={() => this.props.update(this.state)} type='primary'>保存</Button>
             </div>
         )

@@ -33,15 +33,14 @@ export default class CompanyInfo extends React.Component {
                 >NavBar</NavBar>
                 <AvatarSelector selectAvatar={(imageName) => this.setState({ avatar: imageName })} />
                 <InputItem onChange={(v) => this.onChange('title', v)} >招聘职位</InputItem>
-                <InputItem onChange={(v) => this.onChange('companyName', v)} >公司名称</InputItem>
+                <InputItem onChange={(v) => this.onChange('company', v)} >公司名称</InputItem>
                 <InputItem onChange={(v) => this.onChange('salary', v)} >期望薪资</InputItem>
                 <TextareaItem
                     title="职位简介"
                     placeholder="请输入..."
                     rows={3}
+                    onChange={(v) => this.onChange('desc', v)}
                     clear />
-                <InputItem onChange={(v) => this.onChange('desc', v)} ></InputItem>
-
                 <Button onClick={() => this.props.update(this.state)} type='primary'>保存</Button>
             </div>
         )

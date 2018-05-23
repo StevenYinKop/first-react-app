@@ -1,7 +1,28 @@
 import React from 'react'
+import { TabBar } from 'antd-mobile'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 
-const NavLink = (props) => {
-    return (<h1>NavLink</h1>)
+const NavLink = ({ navList, location, history }) => {
+
+    navList = navList.filter(v => !v.hide)
+
+    return (
+        <TabBar>
+            {navList && navList.map(item =>
+                <TabBar.Item
+                    icon={{ uri: require(`./img/${item.icon}.png`) }}
+                    selectedIcon={{ uri: require(`./img/${item.icon}-active.png`) }}
+                    selected={location.pathname === item.path}
+                    title={item.title}
+                    onPress={() => history.push(item.path)}
+                    key={item.path} />)}
+        </TabBar>
+    )
 }
 
-export default NavLink
+NavLink.propTypes = {
+    navList: PropTypes.array.isRequired
+}
+// export default NavLink
+export default withRouter(NavLink)

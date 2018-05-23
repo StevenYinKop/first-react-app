@@ -16,9 +16,11 @@ Router.get('/info', function (req, resp) {
     })
 })
 Router.get('/list', function (req, resp) {
-    User.find({}, function (err, doc) {
+    console.log('/list', req.query)
+    const { type } = req.query
+    User.find({type}, function (err, doc) {
         if (err) throw err
-        return resp.json(doc)
+        return resp.json({ code: 0, data: doc })
     })
 })
 
