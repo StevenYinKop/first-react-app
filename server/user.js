@@ -1,9 +1,19 @@
 const model = require('./model')
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
 const express = require('express')
 const utils = require('utility')
 const Router = express.Router()
 const _filter = { 'password': 0, '_v': 0}
+
+Router.get('/getmsglist', function(req, resp) {
+    const user = req.cookies.user
+    Chat.find({'$or': [{from: user, to:user}]}, function(err, doc) {
+        if(!err){
+            return resp.json({ code:0, data: doc})
+        }
+    })
+})
 
 Router.get('/info', function (req, resp) {
     const { userid } = req.cookies

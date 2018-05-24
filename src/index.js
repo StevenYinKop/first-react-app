@@ -14,6 +14,7 @@ import combineReducers from './reducer'
 import './config'
 import './index.css'
 import DashBorad from './component/dashborad/dashborad';
+import Chat from './component/chat/chat';
 
 const reduxDevtolls = window.devToolsExtension ? window.devToolsExtension() : f => f
 const store = createStore(combineReducers, compose(applyMiddleware(thunk), reduxDevtolls))
@@ -24,10 +25,12 @@ ReactDOM.render(
             <div>
                 <AuthRoute />
                 <Switch >
+                    {/* <Redirect from='/' to='/login' /> */}
                     <Route path='/bossinfo' component={CompanyInfo} />
                     <Route path='/empinfo' component={EmpInfo} />
                     <Route path='/login' component={Login} />
                     <Route path='/register' component={Register} />
+                    <Route path='/chat/:user' component={Chat} /> 
                     {/*  如果不写path属性, 则在上述没有命中就会最终走到这个Route中
                 <Route component={DashBorad} /> */}
                     <Route component={DashBorad} />

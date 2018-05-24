@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavBar } from 'antd-mobile'
-import { Route, withRouter, Switch } from 'react-router-dom'
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import NavLink from '../navlink/navlink';
 import Company from "../company/company";
@@ -39,21 +39,24 @@ const DashBorad = ({ user, location }) => {
         title: '个人中心',
         component: Me,
     }]
-    console.log('DashBorad location', location)
-    console.log('DashBorad me', user)
+    
+    const getTitle = () => {
+        return navList.find(v => location.pathname === v.path)
+    }
+
     return (
         <div>
-            <NavBar className="fix-header">{navList.find(v => location.pathname === v.path).title }</NavBar>
-            <Switch >
-                {navList.map(item =>
-                    <Route key={item.path} path={item.path} component={item.component} />
-                )}
-                {/* <Route path="/company" component={Company} />
-                <Route path="/emp" component={Emp} />
-                <Route path="/msg" component={Msg} />
-                <Route path="/me" component={Me} /> */}
-            </Switch>
-            <NavLink navList={navList}/>
+            <NavBar className="fix-header">{getTitle() ? getTitle().title : <Redirect to='/login'/>}</NavBar>
+            <div style={{ marginTop: 45 }}>
+                <Switch >
+                    {navList.map(item =>
+                        <Route key={item.path} path={item.path} component={item.component} />
+                    )}
+                </Switch>
+            </div>
+            <div style={{ position: 'fixed', height: '45px', width: '100%', bottom: 0 }}>
+                <NavLink navList={navList} />
+            </div>
         </div>
     )
 }

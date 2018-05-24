@@ -4,17 +4,20 @@ import AvatarSelector from '../../component/avatar/avatar'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { update } from '../../redux/user.redux'
+import baseform from "../../component/baseform/baseform";
 
 @connect(
     state => state.user,
     { update }
 )
+@baseform
 export default class EmpInfo extends React.Component {
 
     onChange(key, val) {
-        this.setState({
-            [key]: val,
-        })
+        this.props.handleChange(key, val)
+        // this.setState({
+        //     [key]: val,
+        // })
     }
 
     render() {
@@ -31,7 +34,7 @@ export default class EmpInfo extends React.Component {
                         <Icon key="1" type="ellipsis" />,
                     ]}
                 >应聘者完善资料</NavBar>
-                <AvatarSelector selectAvatar={(imageName) => this.setState({ avatar: imageName })} />
+                <AvatarSelector selectAvatar={(imageName) => this.onChange('avatar', imageName )} />
                 <InputItem onChange={(v) => this.onChange('title', v)} >期望职位</InputItem>
                 <TextareaItem
                     title="个人简介"
@@ -39,7 +42,7 @@ export default class EmpInfo extends React.Component {
                     rows={3}
                     onChange={(v) => this.onChange('desc', v)}
                     clear />
-                <Button onClick={() => this.props.update(this.state)} type='primary'>保存</Button>
+                <Button onClick={() => this.props.update(this.props.state)} type='primary'>保存</Button>
             </div>
         )
     }

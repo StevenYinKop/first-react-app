@@ -10,12 +10,13 @@ body {
   padding-top: 10px;
 }
 
-.am-tab-bar {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-.fix-header .am-navbar {
+/* .am-tab-bar{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+} */
+
+.fix-header.am-navbar {
   position: fixed;
   top: 0;
   width: 100%;
@@ -23,3 +24,30 @@ body {
 .page-content {
   padding: 45px 5px;
 }
+
+#chat-page .chat-me .am-list-extra {
+  flex-basis: auto;
+}
+
+#chat-page .chat-me .am-list-content {
+  padding-right: 15px;
+  text-align: right;
+}
+
+.stick-footer{
+  z-index: 10;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* #tab-bar {
+  display: flex;
+  flex-direction: column;
+} */
+/* #tab-bar {
+  height: 40px;
+} */
+/* #tab-bar .demo-preview-item .am-tab-bar {
+  background-color: white;
+} */

@@ -2,8 +2,19 @@ const express = require('express')
 const userRouter = require('./user')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+
 // const cors = require('cors')
 const app = express()
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+
+io.on('connection', function (socket){
+  socket.on('sendmsg', function(data) {
+    console.log(data)
+    io.emit('recvmsg', data)
+  })
+  console.log('user login')
+})
 
 // app.use(cors({credentials: true}))
 app.use(cookieParser())
@@ -22,6 +33,6 @@ app.use(bodyParser.json())
 //   next()
 // })
 app.use('/user', userRouter)
-app.listen(9093, function () {
+server.listen(9093, function () {
   console.log('Node start at port 9093')
 })

@@ -1,16 +1,19 @@
 import React from 'react'
 import { connect } from "react-redux";
-import { Result, List, WhiteSpace } from 'antd-mobile';
+import { Result, List, WhiteSpace, Modal } from 'antd-mobile';
+import { Redirect } from "react-router-dom";
 import browserCookies from "browser-cookies";
+import { logout } from '../../redux/user.redux'
 
 @connect(
-    state => state.user
+    state => state.user,
+    { logout }
+
 )
 export default class Me extends React.Component {
 
     render() {
-
-        const { user, avatar, type, company, title, desc, money } = this.props
+        const { user, avatar, type, company, title, desc, money, redirectTo } = this.props
         console.log(this.props)
         return (
             user ?
@@ -30,15 +33,20 @@ export default class Me extends React.Component {
                     </List>
                     <WhiteSpace />
                     <List>
-                        <List.Item onClick={()=>{
-                            console.log('logout')
-                            browserCookies.erase('userid')
+                        <List.Item onClick={() => {
+                            Modal.alert('退出登录', '确认退出?', [
+                                { text: '取消', onPress: () => console.log('cancel') },
+                                { text: '确认', onPress: () => {
+                                    browserCookies.erase('userid')
+                                    this.props.logout()
+                                } },
+                            ])
                         }}>
                             {'退出登录'}
                         </List.Item>
                     </List>
                 </div>
-                : null
+                : <Redirect to={redirectTo} />
         )
     }
 

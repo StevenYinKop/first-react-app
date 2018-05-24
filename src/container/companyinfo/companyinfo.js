@@ -4,17 +4,20 @@ import AvatarSelector from '../../component/avatar/avatar'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { update } from '../../redux/user.redux'
+import baseform from '../../component/baseform/baseform';
 
 @connect(
     state => state.user,
     { update }
 )
+@baseform
 export default class CompanyInfo extends React.Component {
 
     onChange(key, val) {
-        this.setState({
-            [key]: val,
-        })
+        this.props.handleChange(key, val)
+        // this.setState({
+        //     [key]: val,
+        // })
     }
 
     render() {
@@ -31,7 +34,7 @@ export default class CompanyInfo extends React.Component {
                         <Icon key="1" type="ellipsis" />,
                     ]}
                 >NavBar</NavBar>
-                <AvatarSelector selectAvatar={(imageName) => this.setState({ avatar: imageName })} />
+                <AvatarSelector selectAvatar={(imageName) => this.onChange('avatar', imageName )}/>
                 <InputItem onChange={(v) => this.onChange('title', v)} >招聘职位</InputItem>
                 <InputItem onChange={(v) => this.onChange('company', v)} >公司名称</InputItem>
                 <InputItem onChange={(v) => this.onChange('salary', v)} >期望薪资</InputItem>
@@ -41,7 +44,7 @@ export default class CompanyInfo extends React.Component {
                     rows={3}
                     onChange={(v) => this.onChange('desc', v)}
                     clear />
-                <Button onClick={() => this.props.update(this.state)} type='primary'>保存</Button>
+                <Button onClick={() => this.props.update(this.props.state)} type='primary'>保存</Button>
             </div>
         )
     }
