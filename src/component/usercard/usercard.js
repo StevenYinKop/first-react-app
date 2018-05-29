@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 const UserCard = ({ userlist, history }) => {
-    const handleClick = v => history.push(`chat/${v}`)
+    
+    const handleClick = v => history.push(`chat/${v._id}`)
 
     return (<WingBlank>
         {userlist && userlist.map(item =>
@@ -13,7 +14,7 @@ const UserCard = ({ userlist, history }) => {
                     <WhiteSpace />
                     <Card 
                     key={item._id} 
-                    onClick={()=>handleClick(item.user)}>
+                    onClick={()=>handleClick(item)}>
                         <Card.Header
                             title={item.user}
                             thumb={require(`../img/${item.avatar}.png`)}
